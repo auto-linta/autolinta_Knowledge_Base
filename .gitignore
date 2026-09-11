@@ -5,6 +5,14 @@
 !.gitignore
 !.github/
 
+# 本地开发配置与运行数据（显式列出，避免未来调整隐藏文件规则时误提交）
+/.env
+/.env.local
+/.local-data/
+/.DS_Store
+/tmp/
+/openspec/changes/*/.openspec.yaml
+
 # 敏感文件
 *.pem
 *_key

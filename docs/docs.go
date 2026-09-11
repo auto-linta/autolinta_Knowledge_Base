@@ -19,6 +19,68 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/knowledge-bases/{id}/knowledge/file/preflight": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    },
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据 MD5 和文件类型检查当前知识库中的非 failed 文件，不接收文件正文，不修改已有文档。正式上传仍校验重复。",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "知识管理"
+                ],
+                "summary": "批量检查上传文件重复",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "知识库 ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "1 至 200 个文件指纹，候选 ID 不可重复",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_Tencent_WeKnora_internal_types.UploadPreflightRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "按候选 ID 返回重复检查结果",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "无效指纹或超出批量限制",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_Tencent_WeKnora_internal_errors.AppError"
+                        }
+                    },
+                    "403": {
+                        "description": "无上传权限",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_Tencent_WeKnora_internal_errors.AppError"
+                        }
+                    }
+                }
+            }
+        },
         "/agent-chat/{session_id}": {
             "post": {
                 "security": [
@@ -17283,6 +17345,43 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "github_com_Tencent_WeKnora_internal_types.UploadFingerprint": {
+            "type": "object",
+            "required": [
+                "file_hash",
+                "file_type",
+                "id"
+            ],
+            "properties": {
+                "file_hash": {
+                    "type": "string"
+                },
+                "file_type": {
+                    "type": "string",
+                    "maxLength": 32
+                },
+                "id": {
+                    "type": "string",
+                    "maxLength": 128
+                }
+            }
+        },
+        "github_com_Tencent_WeKnora_internal_types.UploadPreflightRequest": {
+            "type": "object",
+            "required": [
+                "files"
+            ],
+            "properties": {
+                "files": {
+                    "type": "array",
+                    "maxItems": 200,
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/github_com_Tencent_WeKnora_internal_types.UploadFingerprint"
+                    }
+                }
+            }
+        },
         "github_com_Tencent_WeKnora_internal_application_service.WikiLintIssue": {
             "type": "object",
             "properties": {

@@ -7,6 +7,7 @@
 | 方法   | 路径                                       | 描述                                       |
 | ------ | ------------------------------------------ | ------------------------------------------ |
 | POST   | `/knowledge-bases/:id/knowledge/file`      | 上传文件创建知识（multipart）             |
+| POST   | `/knowledge-bases/:id/knowledge/file/preflight` | 批量检查文件指纹，提前拒绝重复文件      |
 | POST   | `/knowledge-bases/:id/knowledge/url`       | 从 URL 创建知识（网页抓取或文件下载）       |
 | POST   | `/knowledge-bases/:id/knowledge/manual`    | 创建手工 Markdown 知识                     |
 | GET    | `/knowledge-bases/:id/knowledge`           | 列出知识库下的知识（支持分页/筛选）         |
@@ -37,6 +38,37 @@
 > - 关键状态字段：`parse_status` 取值 `pending` / `processing` / `finalizing` / `completed` / `failed` / `cancelled`；`enable_status` 取值 `enabled` / `disabled`。
 > - `processing` 指 DocReader / 分块 / 向量化阶段；`finalizing` 指主解析已完成、仍在执行摘要 / 问题生成 / 图谱抽取等索引优化任务；只有当全部子任务到达终态后才进入 `completed`。
 > - `cancelled` 表示解析被用户主动取消，可通过 `reparse` 重新触发。`pending` / `processing` / `finalizing` 这三种状态都可通过 `cancel-parse` 终止。
+
+## POST `/knowledge-bases/:id/knowledge/file/preflight` - 上传前检查重复
+
+需要与文件上传相同的知识库写入权限；空间 API Key 需要 `ingest` 能力及目标知识库范围。请求体最多 128 KiB，每次检查 1–200 个指纹，不包含文件正文。
+
+```json
+{
+  "files": [
+    { "id": "candidate-0", "file_hash": "d41d8cd98f00b204e9800998ecf8427e", "file_type": "pdf" }
+  ]
+}
+```
+
+- `id`：客户端候选标识，1–128 字符，同一次请求不可重复。
+- `file_hash`：完整文件内容的 32 位十六进制 MD5；前端分块读取计算。
+- `file_type`：文件扩展名，不含点，最多 32 个字母或数字，不区分大小写。
+
+```json
+{
+  "success": true,
+  "data": [
+    { "id": "candidate-0", "duplicate": true, "knowledge_id": "existing-document-id", "file_name": "电路图.pdf", "folder_path": "k5/2018" }
+  ]
+}
+```
+
+非重复项只返回 `id` 和 `duplicate: false`。重复范围为当前租户、当前知识库、相同内容及文件类型，并沿用正式上传排除 `failed` 和已软删除文档的规则。改名不绕过去重；同名不同内容允许上传。校验失败返回 400，无权限返回 403。预检不更新已有文档，正式上传仍可能返回 409 `duplicate_file`。
+
+浏览器上传队列先做批内去重，再分批完成服务端预检，全部预检完成后最多同时上传 3 份文件；连续选择的批次依次执行。全局面板分别显示“已上传”和服务端解析状态。预检失败时不发送正文；停止会中断活动请求并停止派发，状态不明的请求需要重试前核实。撤销只删除本批明确新建的文档 ID，异步删除完成须经 ID 查询核实。
+
+队列在应用内切页后继续存在，不持久化本地文件。刷新或关闭页面会中断；再次选择同批文件会重新预检。账号/空间切换停止旧队列。预检与正式上传之间没有跨实例数据库唯一锁，不保证多个客户端同时上传同一新文件时的原子去重。
 
 ## POST `/knowledge-bases/:id/knowledge/file` - 上传文件创建知识
 

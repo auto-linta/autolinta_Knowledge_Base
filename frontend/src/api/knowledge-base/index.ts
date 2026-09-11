@@ -214,6 +214,7 @@ export function uploadKnowledgeFile(
     [key: string]: any
   } = { file: new File([], '') },
   onProgress?: (progressEvent: any) => void,
+  signal?: AbortSignal,
 ) {
   const formData = new FormData();
   Object.keys(data).forEach(key => {
@@ -227,7 +228,11 @@ export function uploadKnowledgeFile(
       formData.append(key, value);
     }
   });
-  return postUpload(`/api/v1/knowledge-bases/${kbId}/knowledge/file`, formData, onProgress);
+  return postUpload(`/api/v1/knowledge-bases/${kbId}/knowledge/file`, formData, onProgress, { signal });
+}
+
+export function preflightKnowledgeFiles(kbId: string, files: import('@/utils/knowledgeUploadQueue').Fingerprint[], signal?: AbortSignal) {
+  return post(`/api/v1/knowledge-bases/${kbId}/knowledge/file/preflight`, { files }, { signal });
 }
 
 // 从URL创建知识
@@ -370,8 +375,8 @@ export function delKnowledgeDetails(id: string) {
 }
 
 // 批量删除（同一知识库内）。后端会校验所有 id 隶属于 kb_id 且具有编辑权限。
-export function batchDeleteKnowledge(kbId: string, ids: string[]) {
-  return post(`/api/v1/knowledge/batch-delete`, { kb_id: kbId, ids });
+export function batchDeleteKnowledge(kbId: string, ids: string[], signal?: AbortSignal) {
+  return post(`/api/v1/knowledge/batch-delete`, { kb_id: kbId, ids }, { signal });
 }
 
 export function downKnowledgeDetails(id: string) {
@@ -383,12 +388,12 @@ export function previewKnowledgeFile(id: string) {
 }
 
 /** @param idsQueryString - query string with ids (e.g. ids=xxx&ids=yyy) */
-export function batchQueryKnowledge(idsQueryString: string, kbId?: string, agentId?: string, agentSourceTenantId?: string) {
+export function batchQueryKnowledge(idsQueryString: string, kbId?: string, agentId?: string, agentSourceTenantId?: string, signal?: AbortSignal) {
   let qs = idsQueryString;
   if (kbId) qs += `&kb_id=${encodeURIComponent(kbId)}`;
   if (agentId) qs += `&agent_id=${encodeURIComponent(agentId)}`;
   if (agentSourceTenantId) qs += `&agent_source_tenant_id=${encodeURIComponent(agentSourceTenantId)}`;
-  return get(`/api/v1/knowledge/batch?${qs}`);
+  return get(`/api/v1/knowledge/batch?${qs}`, { signal });
 }
 
 export const KNOWLEDGE_CHUNK_PAGE_SIZE = 25;

@@ -600,6 +600,7 @@ func TestKnowledgeBatchWriteRoutesDeclareIngestCapability(t *testing.T) {
 		method string
 		path   string
 	}{
+		{http.MethodPost, "/api/v1/knowledge-bases/:id/knowledge/file/preflight"},
 		{http.MethodPost, "/api/v1/knowledge/move"},
 		{http.MethodPost, "/api/v1/knowledge/batch-delete"},
 		{http.MethodPost, "/api/v1/knowledge/batch-reparse"},

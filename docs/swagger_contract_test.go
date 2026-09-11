@@ -199,3 +199,35 @@ func swaggerInteger(value any) int {
 		return 0
 	}
 }
+
+func TestUploadPreflightContractInAllSwaggerArtifacts(t *testing.T) {
+	for _, document := range swaggerDocuments() {
+		t.Run(document.name, func(t *testing.T) {
+			var spec struct {
+				Paths       map[string]map[string]swaggerOperation `json:"paths" yaml:"paths"`
+				Definitions map[string]any                         `json:"definitions" yaml:"definitions"`
+			}
+			if err := document.parse(document.loadSpec(t), &spec); err != nil {
+				t.Fatal(err)
+			}
+			operation, ok := spec.Paths["/knowledge-bases/{id}/knowledge/file/preflight"]["post"]
+			if !ok {
+				t.Fatal("missing upload preflight endpoint")
+			}
+			body := false
+			for _, parameter := range operation.Parameters {
+				if parameter.In == "body" && parameter.Required {
+					body = true
+				}
+			}
+			if !body {
+				t.Fatal("preflight requires a fingerprint request body")
+			}
+			for _, name := range []string{"UploadFingerprint", "UploadPreflightRequest"} {
+				if _, ok := spec.Definitions["github_com_Tencent_WeKnora_internal_types."+name]; !ok {
+					t.Fatalf("missing %s schema", name)
+				}
+			}
+		})
+	}
+}

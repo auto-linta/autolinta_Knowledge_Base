@@ -11,6 +11,7 @@ import (
 
 // KnowledgeService defines the interface for knowledge services.
 type KnowledgeService interface {
+	PreflightFileUploads(ctx context.Context, kbID string, files []types.UploadFingerprint) ([]types.UploadPreflightResult, error)
 	// CreateKnowledgeFromFile creates knowledge from a file.
 	// channel identifies the ingestion channel (e.g. "web", "api", "wechat"); empty defaults to "web".
 	CreateKnowledgeFromFile(
@@ -230,6 +231,7 @@ type KnowledgeService interface {
 
 // KnowledgeRepository defines the interface for knowledge repositories.
 type KnowledgeRepository interface {
+	FindFileDuplicates(ctx context.Context, tenantID uint64, kbID string, hashes []string) ([]*types.Knowledge, error)
 	CreateKnowledge(ctx context.Context, knowledge *types.Knowledge) error
 	GetKnowledgeByID(ctx context.Context, tenantID uint64, id string) (*types.Knowledge, error)
 	// GetKnowledgeByIDOnly returns knowledge by ID without tenant filter (for permission resolution).

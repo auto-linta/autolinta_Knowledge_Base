@@ -132,6 +132,7 @@ instance.interceptors.response.use(
     }
   },
   async (error: any) => {
+    if (axios.isCancel(error)) return Promise.reject(error);
     const originalRequest = error.config;
     
     if (!error.response) {
