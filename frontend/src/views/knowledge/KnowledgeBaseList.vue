@@ -4,8 +4,13 @@
       :count-mine="kbs.length" :count-by-org="effectiveSharedCountByOrg" :count-favorites="kbFavoritesCount"
       :count-recents="kbRecentsCount" />
     <div class="kb-list-content">
+      <div class="intelligence-rail" aria-hidden="true">
+        <span>AUTOLINTA / INTELLIGENCE LAYER</span>
+        <span class="intelligence-rail-status"><i></i> TRUSTED KNOWLEDGE ONLINE</span>
+      </div>
       <div class="header" style="--wails-draggable: drag">
         <div class="header-title" style="--wails-draggable: drag">
+          <div class="header-eyebrow">KNOWLEDGE OPERATIONS · 01</div>
           <div class="title-row" style="--wails-draggable: drag">
             <h2 style="--wails-draggable: drag">{{ $t('knowledgeBase.title') }}</h2>
             <t-tooltip v-if="authStore.hasRole('contributor')" :content="$t('knowledgeList.create')" placement="bottom">
@@ -1802,20 +1807,66 @@ const handleUploadFinishedEvent = (event: Event) => {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 20px 0 0 28px;
+  padding: 0 0 0 28px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--td-component-stroke) 40%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--td-component-stroke) 32%, transparent) 1px, transparent 1px),
+    var(--td-bg-color-container);
+  background-size: 88px 88px;
+}
+
+.intelligence-rail {
+  height: 38px;
+  margin-left: -28px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--td-component-stroke);
+  color: var(--td-text-color-placeholder);
+  font-family: var(--app-font-family-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  line-height: 1;
+}
+
+.intelligence-rail-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 28px;
+}
+
+.intelligence-rail-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--td-brand-color);
+  box-shadow: 0 0 0 4px var(--td-brand-color-focus);
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  padding-top: 24px;
   padding-right: 28px;
 
   .header-title {
     display: flex;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .header-eyebrow {
+    color: var(--td-brand-color);
+    font-family: var(--app-font-family-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 16px;
   }
 
   .title-row {
@@ -1828,15 +1879,16 @@ const handleUploadFinishedEvent = (event: Event) => {
     margin: 0;
     color: var(--td-text-color-primary);
     font-family: var(--app-font-family);
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 32px;
+    font-size: 28px;
+    font-weight: 760;
+    letter-spacing: -0.045em;
+    line-height: 34px;
   }
 
 }
 
 .kb-create-btn {
-  background: linear-gradient(135deg, var(--td-brand-color) 0%, #00a67e 100%);
+  background: linear-gradient(135deg, #ff4936 0%, var(--td-brand-color-active) 100%);
   border: none;
   color: var(--td-text-color-anti);
 
@@ -2195,7 +2247,7 @@ const handleUploadFinishedEvent = (event: Event) => {
 
 .kb-card-wrap {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   grid-template-columns: 1fr;
   animation: contentFadeIn 0.32s ease-out;
 }
@@ -2284,15 +2336,15 @@ const handleUploadFinishedEvent = (event: Event) => {
 
 .kb-card {
   border: 1px solid var(--td-component-stroke);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-sizing: border-box;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
   background: var(--td-bg-color-container);
   position: relative;
   cursor: pointer;
-  transition: all 0.25s ease;
-  padding: 12px 14px;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   height: 136px;
@@ -2316,7 +2368,8 @@ const handleUploadFinishedEvent = (event: Event) => {
 
   &:hover {
     border-color: var(--td-brand-color);
-    box-shadow: 0 4px 12px rgba(7, 192, 95, 0.12);
+    box-shadow: 0 12px 30px rgba(249, 40, 21, 0.1);
+    transform: translateY(-2px);
   }
 
   &.uninitialized {
@@ -2325,11 +2378,11 @@ const handleUploadFinishedEvent = (event: Event) => {
 
   // 文档类型样式
   &.kb-type-document {
-    background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(7, 192, 95, 0.04) 100%);
+    background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(249, 40, 21, 0.025) 100%);
 
     &:hover {
       border-color: var(--td-brand-color);
-      background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(7, 192, 95, 0.08) 100%);
+      background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(249, 40, 21, 0.055) 100%);
     }
 
     // 右上角装饰
@@ -2340,8 +2393,8 @@ const handleUploadFinishedEvent = (event: Event) => {
       right: 0;
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, rgba(7, 192, 95, 0.08) 0%, transparent 100%);
-      border-radius: 0 12px 0 100%;
+      background: linear-gradient(135deg, rgba(249, 40, 21, 0.1) 0%, transparent 72%);
+      border-radius: 0 4px 0 100%;
       pointer-events: none;
       z-index: 0;
     }
@@ -2349,12 +2402,12 @@ const handleUploadFinishedEvent = (event: Event) => {
 
   // 问答类型样式
   &.kb-type-faq {
-    background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(0, 82, 217, 0.04) 100%);
+    background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(249, 40, 21, 0.025) 100%);
 
     &:hover {
       border-color: var(--td-brand-color);
-      box-shadow: 0 4px 12px rgba(0, 82, 217, 0.12);
-      background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(0, 82, 217, 0.08) 100%);
+      box-shadow: 0 12px 30px rgba(249, 40, 21, 0.1);
+      background: linear-gradient(135deg, var(--td-bg-color-container) 0%, rgba(249, 40, 21, 0.055) 100%);
     }
 
     // 右上角装饰
@@ -2365,8 +2418,8 @@ const handleUploadFinishedEvent = (event: Event) => {
       right: 0;
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, rgba(0, 82, 217, 0.08) 0%, transparent 100%);
-      border-radius: 0 12px 0 100%;
+      background: linear-gradient(135deg, rgba(249, 40, 21, 0.1) 0%, transparent 72%);
+      border-radius: 0 4px 0 100%;
       pointer-events: none;
       z-index: 0;
     }

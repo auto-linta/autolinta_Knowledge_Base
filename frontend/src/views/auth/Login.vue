@@ -96,13 +96,13 @@
     </div>
 
     <!-- Logo - Top Left -->
-    <a href="https://github.com/Tencent/WeKnora" target="_blank" class="header-logo" :title="$t('common.github')">
-      <img src="@/assets/img/weknora.png" alt="WeKnora" class="logo-image" />
+    <a href="http://www.autolinta.com/" target="_blank" class="header-logo" :title="$t('common.website')">
+      <BrandLogo inverse />
     </a>
 
     <!-- Header Links - Top Right -->
     <div class="header-links">
-      <a href="https://weknora.weixin.qq.com" target="_blank" class="header-link" :title="$t('common.website')">
+      <a href="http://www.autolinta.com/" target="_blank" class="header-link" :title="$t('common.website')">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
           stroke-linecap="round">
           <circle cx="12" cy="12" r="10" />
@@ -112,12 +112,13 @@
         <span class="link-text">{{ $t('common.website') }}</span>
       </a>
 
-      <a href="https://github.com/Tencent/WeKnora" target="_blank" class="header-link" :title="$t('common.info')">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+      <a href="http://www.autolinta.com/#analysis" target="_blank" class="header-link" :title="$t('common.info')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 17 17 7" />
+          <path d="M7 7h10v10" />
         </svg>
-        <span class="link-text">GitHub</span>
+        <span class="link-text">AutoLinta</span>
       </a>
 
       <div class="language-switch">
@@ -145,14 +146,15 @@
     <!-- Left Showcase Section -->
     <div class="showcase-section">
       <div class="showcase-content">
-        <p class="showcase-subtitle">{{ $t('platform.subtitle') }}</p>
-        <p class="showcase-description">{{ $t('platform.description') }}</p>
+        <p class="showcase-eyebrow">AUTOMOTIVE INTELLIGENCE INFRASTRUCTURE</p>
+        <h1 class="showcase-heading">Trusted data.<br /><span>Decisions in motion.</span></h1>
+        <p class="showcase-subtitle">A secure intelligence workspace for vehicle knowledge, service evidence and AI-driven decisions.</p>
 
         <div class="feature-tags">
-          <span class="tag">{{ $t('platform.rag') }}</span>
-          <span class="tag">{{ $t('platform.agent') }}</span>
-          <span class="tag">{{ $t('platform.wiki') }}</span>
-          <span class="tag">{{ $t('platform.hybridSearch') }}</span>
+          <span class="tag">VEHICLE KNOWLEDGE</span>
+          <span class="tag">TRUSTED EVIDENCE</span>
+          <span class="tag">AI AGENTS</span>
+          <span class="tag">DECISION ENGINE</span>
         </div>
 
         <!-- Swiper Carousel -->
@@ -177,6 +179,7 @@
       <div class="form-panel">
         <!-- Login Card -->
         <div class="form-card" v-if="!isRegisterMode">
+          <div class="brand-form-kicker">INTELLIGENCE CONSOLE / SECURE ACCESS</div>
           <!-- invite_only 模式下共享链接停在登录卡，同样需要邀请上下文。 -->
           <div v-if="inviteLookup" class="invite-banner">
             <t-icon name="link" class="invite-banner__icon" />
@@ -258,6 +261,7 @@
              arrived with a valid share-link token (which bypasses the
              invite_only gate). -->
         <div class="form-card" v-if="isRegisterMode && (registrationEnabled || inviteLookup)">
+          <div class="brand-form-kicker">INTELLIGENCE CONSOLE / CREATE ACCESS</div>
           <!-- Share-link banner: shown only when ?token= resolved to a
                real invitation row. Sits above the form header so the
                invitee instantly sees who invited them and into which
@@ -340,6 +344,7 @@
 </template>
 
 <script setup lang="ts">
+import BrandLogo from '@/components/BrandLogo.vue'
 import { ref, reactive, nextTick, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { MessagePlugin } from 'tdesign-vue-next'

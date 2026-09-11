@@ -9,6 +9,7 @@ import "tdesign-vue-next/dist/tdesign.css";
 import "@/assets/theme/theme.css";
 import "@/assets/dropdown-menu.less";
 import "@/components/css/chat-hljs-dark.less";
+import "@/assets/autolinta-brand.css";
 // vue-virtual-scroller ships its own tiny stylesheet — required for
 // RecycleScroller/DynamicScroller to size their viewport correctly.
 // Without it the scroller computes 0 height and renders no items.
