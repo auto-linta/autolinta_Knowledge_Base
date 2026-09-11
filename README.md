@@ -1,68 +1,51 @@
 <p align="center">
-  <picture>
-    <img src="./docs/images/logo.png" alt="WeKnora Logo" height="120"/>
-  </picture>
+  <img src="./frontend/public/autolinta-favicon.svg" alt="AutoLinta" height="96"/>
+</p>
+
+<h1 align="center">AutoLinta Knowledge Base</h1>
+
+<p align="center">
+  Automotive knowledge infrastructure for trusted retrieval, document intelligence and AI-assisted decisions.
 </p>
 
 <p align="center">
-  <picture>
-    <a href="https://trendshift.io/repositories/15289" target="_blank">
-      <img src="https://trendshift.io/api/badge/repositories/15289" alt="Tencent/WeKnora | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/>
+    <a href="https://github.com/auto-linta/autolinta_Knowledge_Base">
+        <img alt="Repository" src="https://img.shields.io/badge/Repository-AutoLinta-f92815">
     </a>
-  </picture>
-</p>
-<p align="center">
-    <a href="https://weknora.weixin.qq.com" target="_blank">
-        <img alt="Official Website" src="https://img.shields.io/badge/Official Website-WeKnora-4e6b99">
+    <a href="./LICENSE">
+        <img alt="License" src="https://img.shields.io/badge/License-MIT-101113">
     </a>
-    <a href="https://chatbot.weixin.qq.com" target="_blank">
-        <img alt="WeChat Dialog Open Platform" src="https://img.shields.io/badge/WeChat Dialog Open Platform-5ac725">
+    <a href="https://github.com/Tencent/WeKnora">
+        <img alt="Upstream" src="https://img.shields.io/badge/Upstream-WeKnora-4e6b99">
     </a>
-    <a href="https://chromewebstore.google.com/detail/jpemjbopikggjlmikmclgbmkhhopjdgd" target="_blank">
-        <img alt="Chrome Extension" src="https://img.shields.io/badge/Chrome Extension-WeKnora-4285F4">
-    </a>
-    <a href="https://clawhub.ai/lyingbug/weknora" target="_blank">
-        <img alt="ClawHub Skill" src="https://img.shields.io/badge/ClawHub Skill-WeKnora-ff6b35">
-    </a>
-    <a href="https://www.npmjs.com/package/@wxg-prc-cpg/dsh-weknora" target="_blank">
-        <img alt="npm @wxg-prc-cpg/dsh-weknora" src="https://img.shields.io/npm/v/@wxg-prc-cpg/dsh-weknora?label=dsh-weknora">
-    </a>
-    <a href="https://github.com/Tencent/WeKnora/blob/main/LICENSE">
-        <img src="https://img.shields.io/badge/License-MIT-ffffff?labelColor=d4eaf7&color=2e6cc4" alt="License">
-    </a>
-    <a href="./CHANGELOG.md">
-        <img alt="Version" src="https://img.shields.io/badge/version-0.8.0-2e6cc4?labelColor=d4eaf7">
-    </a>
-</p>
-
-<p align="center">
-| <b>English</b> | <a href="./README_CN.md"><b>简体中文</b></a> | <a href="./README_JA.md"><b>日本語</b></a> | <a href="./README_KO.md"><b>한국어</b></a> |
 </p>
 
 <p align="center">
   <h4 align="center">
 
-  [Overview](#-overview) • [Architecture](#-architecture) • [Key Features](#-key-features) • [Getting Started](#-getting-started) • [API Reference](#-api-reference) • [Developer Guide](#-developer-guide)
+  [Overview](#-overview) • [AutoLinta Enhancements](#-autolinta-enhancements) • [Architecture](#-architecture) • [Features](#-feature-overview) • [Getting Started](#-getting-started) • [Developer Guide](#-developer-guide)
   
   </h4>
 </p>
 
-# 💡 WeKnora — Turn Documents into Living Knowledge with RAG, Agents and Auto-Wiki
-
 ## 📌 Overview
 
-[**WeKnora**](https://weknora.weixin.qq.com) is an open-source, LLM-powered knowledge framework built for enterprise-grade document understanding, semantic retrieval, and autonomous reasoning.
+**AutoLinta Knowledge Base** is AutoLinta's self-hosted platform for organizing automotive manuals, service information and other trusted operational knowledge. It turns large document collections into searchable, traceable knowledge that can support retrieval, question answering and AI agents.
 
-https://github.com/user-attachments/assets/19b28ce2-a62f-4f54-b289-c983576259bc
+The platform supports folder-aware document import, configurable parsing and chunking, automatic tagging, vector retrieval, citations, agent workflows and private deployment. It accepts PDF, Word, images, spreadsheets, presentations, Markdown, HTML and other common formats, and can connect to multiple model, vector-database and object-storage providers.
 
-*2:25 · 1080p · English narration & captions.*
+This repository is maintained by **AutoLinta** and is built on the open-source [Tencent WeKnora](https://github.com/Tencent/WeKnora) project. Upstream technical identifiers such as the Go module path, environment-variable names, CLI commands and some container names remain unchanged for compatibility. AutoLinta product branding and product-specific behavior are maintained in this repository.
 
-It is organized around three core capabilities: **RAG-based Quick Q&A** for everyday lookups, a **ReAct Agent** that autonomously orchestrates retrieval, MCP tools, a **tenant skill catalog**, session-persistent **Docker / E2B / Cube sandboxes** and web search to handle complex multi-step tasks, and a brand-new **Wiki Mode** in which agents distill raw documents into a self-maintaining, interlinked markdown knowledge base with an interactive knowledge graph, complete with manual editing, revision history and one-click rollback. **Cross-session long-term memory** remembers who you are and what you keep asking about. Knowledge curation is equally hands-on: a **tree-structured folder view** preserves the directory layout of uploads, and **chunk editing with revision history** lets retrieval chunks be edited, diffed and reverted like documents. Combined with multi-source ingestion (Feishu wiki / Feishu Drive / GitLab / Tencent IMA / Notion / Yuque / RSS, and growing), **website embed widgets** for publishing agents to external sites, **scoped API keys with a principal model** for programmatic integrations, **multi-instance storage backends** per workspace for flexible data placement, 20+ LLM provider integrations (including LiteLLM), full Langfuse observability plus a **runtime task-queue dashboard with worker-pool governance**, **enterprise-ready multi-workspace RBAC** (4-tier role matrix + per-resource ownership + per-workspace audit log), and a fully self-hostable modular architecture, WeKnora turns scattered documents into a queryable, reasoning-capable, continuously evolving knowledge asset.
+## ✨ AutoLinta Enhancements
 
-The framework supports auto-syncing knowledge from Feishu, GitLab, Tencent IMA, Notion, and Yuque (more data sources coming soon), handles 10+ document formats including PDF, Word, images, Excel and XMind, and can serve Q&A directly through IM channels like WeCom, Feishu, Slack, and Telegram. It is compatible with major LLM providers including OpenAI, DeepSeek, Qwen (Alibaba Cloud), Zhipu, Hunyuan, Gemini, MiniMax, NVIDIA, LiteLLM, and Ollama. Office files can be parsed in-process with **anydoc**. Its fully modular design allows swapping LLMs, vector databases, and storage backends, with support for local and private cloud deployment ensuring complete data sovereignty. WeKnora also integrates with **Langfuse** for comprehensive observability into agent reasoning, token usage, and pipeline tracing.
+- **AutoLinta product experience** — branded login, navigation, knowledge-base views, colors, typography and browser metadata.
+- **Reliable large-folder uploads** — a persistent task panel shows hashing, upload and parsing state for every file; uploads run through a bounded queue with stop, retry and rollback controls.
+- **Duplicate protection** — browser-side MD5 and a server-side preflight endpoint reject duplicate files before transfer, including duplicates within the selected batch and files already stored in the target knowledge base.
+- **Private deployment workflow** — Docker Compose builds the AutoLinta frontend and Go API directly from this repository while retaining persistent database and document volumes.
 
+## 📦 Upstream Platform Baseline
 
-## ✨ Latest Updates
+AutoLinta Knowledge Base inherits the following platform capabilities and release history from WeKnora:
 
 - **v0.8.0** — **Skill sandbox runtime** (session-persistent Docker / E2B / Cube backends with per-tenant network policy; Local host-process backend removed; Docker opt-in); **tenant skill catalog** (install from ClawHub / SkillHub / git / zip, per-sandbox snapshots, live progress, file browse/edit, personal and workspace env vars); **cross-session long-term memory** (profile / preference / fact / task / interest, auto-extract with confirm, `search_memory`); **in-process anydoc office parser**; official **DeepSeek Harness plugin** `@wxg-prc-cpg/dsh-weknora`; GitLab and Tencent IMA data sources; LiteLLM; Exa and Metaso web search; XMind parsing; chat artifacts, question outline and timestamps; context compaction and provider prompt-cache markers. Plus OIDC JWKS verification, optional complex passwords, document auto-tagging, and broad sandbox/security hardening. See [`CHANGELOG.md`](./CHANGELOG.md).
 - **v0.7.2** — Launched the **official product documentation site** (VitePress; six sections, ~50 pages covering ~360 API endpoints and ~150 environment variables, with standalone Docker/Nginx deployment, quickstart sample data and a local MCP demo); **knowledge base folder tree** (upload paths stored as first-class data, browse/rename/re-file documents like a file manager); **chunk editing with revision history** (edit retrieval chunks in the UI, per-version diff and rollback, automatic reindexing, plus custom document metadata); **Wiki page revision history** (snapshots + line-level diff + one-click rollback + in-browser manual editing); **directly loadable file URLs** via `resource_urls=public` / `RESOURCE_URL_MODE` (third-party apps render images and files without a second authenticated proxy call); **Feishu Drive data source** and docx sync through the blocks API; batch document tagging; **MCP Server 1.1.x** (migrated to the mcp 2.x high-level API, official PyPI package `tencent-weknora-mcp`, new `create_knowledge_from_text` and `list_shared_knowledge_bases` for 29 tools total); AWS S3 default credential chain (IAM Role / IRSA); local HTML upload parsing; QQBot markdown replies; new PR CI checks for app / frontend / docreader / mcp-server. Plus large-scale router and `modelcontext` refactors, rerank and chunking quality work, and broad stability fixes. See [`CHANGELOG.md`](./CHANGELOG.md).
@@ -114,9 +97,9 @@ The framework supports auto-syncing knowledge from Feishu, GitLab, Tencent IMA, 
 
 ## 🏗️ Architecture
 
-![weknora-architecture.png](./docs/images/architecture.png)
+![AutoLinta Knowledge Base architecture](./docs/images/architecture.png)
 
-Fully modular pipeline from document parsing, vectorization, and retrieval to LLM inference — every component is swappable and extensible. Supports local / private cloud deployment with full data sovereignty and a zero-barrier Web UI for quick onboarding.
+AutoLinta Knowledge Base uses a modular pipeline from document parsing, vectorization and retrieval to LLM inference. Model, vector-database and storage components are replaceable, and the full stack can run in a private cloud.
 
 ## 🧩 Feature Overview
 
@@ -144,6 +127,7 @@ Fully modular pipeline from document parsing, vectorization, and retrieval to LL
 | Folder Tree | Folder uploads keep their original directory structure, with a sidebar tree for browsing, folder rename, and re-filing documents into another folder |
 | Chunk Editing & Revisions | Edit retrieval chunks directly in the UI with per-version snapshots, diff and one-click rollback, and automatic reindexing after an edit; generated questions can be added, edited, deleted and regenerated; custom document metadata supported |
 | Per-Upload Process Config | Override parser, chunking, multimodal (VLM / ASR), graph extraction, and question generation per upload batch via upload-confirm dialog or `process_config` API; reparse with new settings |
+| Resilient Bulk Uploads | Track every file in a persistent upload-task panel with hashing, upload and parsing progress; browser-side MD5 plus server preflight rejects duplicates before transfer, while a bounded queue supports stop, retry and rollback |
 | Batch Reparse | Re-queue parsing for multiple documents at once with optional per-batch `process_config` |
 | Data Source Import | Auto-sync from Feishu wiki / Feishu Drive / Lark / GitLab / Tencent IMA / Notion / Yuque / RSS feeds (more data sources coming soon); incremental and full sync |
 | Document Formats | PDF / Word / Txt / Markdown / HTML / EPUB / MHTML / Images / CSV / Excel / PPT / JSON / XMind |
@@ -238,11 +222,11 @@ See [`cli/README.md`](./cli/README.md) for install + 5-minute quickstart and
 ### 📦 Installation & Launch
 
 ```bash
-git clone https://github.com/Tencent/WeKnora.git
-cd WeKnora
+git clone https://github.com/auto-linta/autolinta_Knowledge_Base.git
+cd autolinta_Knowledge_Base
 cp .env.example .env   # Edit .env as needed, see comments in the file
-docker compose pull     # Pull the latest images
-docker compose up -d    # Start core services
+VITE_FRONTEND_COMMIT=$(git rev-parse --short HEAD) \
+  docker compose up -d --build
 ```
 
 Once started, visit **http://localhost** to get started.
@@ -251,15 +235,18 @@ Once started, visit **http://localhost** to get started.
 
 ### 🔄 Upgrading
 
-If you already have WeKnora running and downloaded a newer release:
+To deploy a newer AutoLinta revision from this repository:
 
 ```bash
-# Set WEKNORA_VERSION in .env to the target release (e.g. 0.7.0), or keep latest
-docker compose pull     # Pull images matching WEKNORA_VERSION
-docker compose up -d    # Recreate containers with new images
+git pull --ff-only
+VITE_FRONTEND_COMMIT=$(git rev-parse --short HEAD) \
+  docker compose up -d --build app frontend
+
+docker compose ps
+curl -fsS http://127.0.0.1:8080/health
 ```
 
-> `docker compose up -d` alone reuses locally cached images and may leave the UI version out of sync with the release you downloaded.
+The command recreates the application containers while preserving the database, uploaded files and other named volumes. Avoid `docker compose down -v` during a routine upgrade because `-v` removes persistent volumes.
 
 ### 🔧 Optional Services (Docker Compose Profiles)
 
@@ -267,13 +254,13 @@ Add `--profile` flags to enable additional components. Multiple profiles can be 
 
 | Profile | Description | Command |
 |---------|-------------|---------|
-| _(default)_ | Core services | `docker compose pull && docker compose up -d` |
-| `full` | All features | `docker compose --profile full pull && docker compose --profile full up -d` |
-| `neo4j` | Knowledge Graph (Neo4j) | `docker compose --profile neo4j pull && docker compose --profile neo4j up -d` |
-| `minio` | Object Storage (MinIO) | `docker compose --profile minio pull && docker compose --profile minio up -d` |
-| `langfuse` | Tracing (Langfuse) | `docker compose --profile langfuse pull && docker compose --profile langfuse up -d` |
+| _(default)_ | Core services | `docker compose up -d --build` |
+| `full` | All features | `docker compose --profile full up -d --build` |
+| `neo4j` | Knowledge Graph (Neo4j) | `docker compose --profile neo4j up -d --build` |
+| `minio` | Object Storage (MinIO) | `docker compose --profile minio up -d --build` |
+| `langfuse` | Tracing (Langfuse) | `docker compose --profile langfuse up -d --build` |
 
-Combine profiles: `docker compose --profile neo4j --profile minio pull && docker compose --profile neo4j --profile minio up -d`
+Combine profiles: `docker compose --profile neo4j --profile minio up -d --build`
 
 Stop services: `docker compose down`
 
@@ -301,7 +288,7 @@ WeKnora serves as the core technology framework for the [WeChat Dialog Open Plat
 
 ## 📘 API Reference
 
-**Official product documentation**: [`website-docs/`](./website-docs/README.md) — the complete documentation set organized as Getting Started → Architecture → Features → API → Clients → Development, covering ~360 API endpoints, ~150 environment variables, and 9 extension points. The directory is also a VitePress site: run `cd website-docs && npm install && npm run dev` to preview locally, or deploy it standalone with the `Dockerfile` inside.
+**Bundled platform documentation**: [`website-docs/`](./website-docs/README.md) — the inherited documentation set organized as Getting Started → Architecture → Features → API → Clients → Development, covering ~360 API endpoints, ~150 environment variables, and 9 extension points. Some pages retain upstream WeKnora naming. The directory is also a VitePress site: run `cd website-docs && npm install && npm run dev` to preview locally, or deploy it standalone with the `Dockerfile` inside.
 
 Troubleshooting FAQ: [Troubleshooting FAQ](./docs/QA.md)
 
@@ -337,7 +324,7 @@ make dev-frontend
 
 ## 🤝 Contributing
 
-Welcome to submit [Issues](https://github.com/Tencent/WeKnora/issues) or Pull Requests.
+Welcome to submit [Issues](https://github.com/auto-linta/autolinta_Knowledge_Base/issues) or Pull Requests.
 
 **Process:** Fork → Create branch → Commit changes → Open PR
 
@@ -368,9 +355,9 @@ make test
 
 ## 🔒 Security Notice
 
-**Important:** Starting from v0.1.3, WeKnora includes login authentication functionality to enhance system security. For production deployments, we strongly recommend:
+**Important:** AutoLinta Knowledge Base includes login authentication. For production deployments, we strongly recommend:
 
-- Deploy WeKnora services in internal/private network environments rather than public internet
+- Deploy AutoLinta Knowledge Base services in internal/private network environments rather than public internet
 - Avoid exposing the service directly to public networks to prevent potential information leakage
 - Configure proper firewall rules and access controls for your deployment environment
 - Regularly update to the latest version for security patches and improvements
@@ -379,7 +366,7 @@ make test
 
 Thanks to these excellent contributors:
 
-[![Contributors](https://contrib.rocks/image?repo=Tencent/WeKnora)](https://github.com/Tencent/WeKnora/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=auto-linta/autolinta_Knowledge_Base)](https://github.com/auto-linta/autolinta_Knowledge_Base/graphs/contributors)
 
 ## 📄 License
 
